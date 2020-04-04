@@ -29,8 +29,11 @@ async function startDelayed(muteOriginalStream: boolean) {
       recvAudio.autoplay = true;
 
       recvAudio.onloadedmetadata = () => {
+
         // controls if original stream should also be played
+        // true causes receive track audioLevel == 0
         recvAudio.muted = muteOriginalStream;
+
         const recvAudioSource = audioContext.createMediaStreamSource(recvAudio.srcObject as MediaStream);
         const delayNode = audioContext.createDelay();
         delayNode.delayTime.value = 1; // delay by 1 second
